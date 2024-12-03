@@ -139,3 +139,16 @@ class TestProductModel(unittest.TestCase):
         # delete the product and check it
         product.delete()
         self.assertEqual(len(Product.all()), 0)
+
+    def test_list_all_products(self):
+        """It should show all products"""
+        products = Product.all()
+        self.assertEqual(len(products), 0)
+        # create 5 products
+        for i in range(5):
+            product = ProductFactory()
+            product.create()
+        # fetch all products
+        all_products = Product.all()
+        # check if products created are there
+        self.assertEqual(len(all_products), 5)
